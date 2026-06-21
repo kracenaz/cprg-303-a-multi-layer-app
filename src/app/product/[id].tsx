@@ -1,50 +1,82 @@
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
+import { useState } from "react";
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { PRODUCTS } from "../../data/products";
 
 export default function ProductScreen() {
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
+  const product = PRODUCTS.find((p) => p.id === id);
+
+  if (!product) {
+    return (
+      <View style={styles.notFound}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+          <Text style={styles.backText}>← Back</Text>
+        </TouchableOpacity>
+        <Text style={styles.notFoundText}>Product not found.</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-      >
-        <Text style={styles.backText}>← Back</Text>
-      </TouchableOpacity>
+      {/* Header row */}
+      <View style={styles.headerRow}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+          <Text style={styles.backText}>← Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.shareButton}
+          onPress={() => console.log("Share pressed")}
+        >
+          <Ionicons name="share-outline" size={22} color="#111111" />
+        </TouchableOpacity>
+      </View>
 
-      <Image
-        source={{
-          uri: "https://picsum.photos/600/400",
-        }}
-        style={styles.image}
-      />
+      <Image source={product.image} style={styles.image} contentFit="cover" />
 
       <View style={styles.content}>
-        <Text style={styles.name}>Nike Gato N7</Text>
-
-        <Text style={styles.category}>Men's Shoes</Text>
-
-        <Text style={styles.price}>$160</Text>
+        <Text style={styles.name}>{product.name}</Text>
+        <Text style={styles.category}>{product.category}</Text>
+        <Text style={styles.price}>${product.price}</Text>
 
         <Text style={styles.sectionTitle}>Select Size</Text>
 
         <View style={styles.sizeContainer}>
-          {["7", "8", "9", "10"].map((size) => (
-            <TouchableOpacity key={size} style={styles.sizeButton}>
-              <Text>{size}</Text>
+          {product.sizes.map((size) => (
+            <TouchableOpacity
+              key={size.label}
+              disabled={!size.available}
+              style={[
+                styles.sizeButton,
+                !size.available && styles.sizeButtonUnavailable,
+                selectedSize === size.label && styles.sizeButtonSelected,
+              ]}
+              onPress={() => setSelectedSize(size.label)}
+            >
+              <Text
+                style={[
+                  styles.sizeText,
+                  !size.available && styles.sizeTextUnavailable,
+                ]}
+              >
+                {size.label}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton} onPress={() => router.back()}>
           <Text style={styles.addButtonText}>Add to Bag</Text>
         </TouchableOpacity>
 
@@ -59,11 +91,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  notFound: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  notFoundText: {
+    textAlign: "center",
+    marginTop: 80,
+    fontSize: 18,
+    color: "#666",
+  },
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingRight: 20,
+  },
   backButton: {
     padding: 20,
   },
   backText: {
     fontSize: 18,
+  },
+  shareButton: {
+    padding: 8,
   },
   image: {
     width: "100%",
@@ -94,14 +145,30 @@ const styles = StyleSheet.create({
   },
   sizeContainer: {
     flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10,
   },
   sizeButton: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#E5E5E5",
     paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     borderRadius: 8,
+  },
+  sizeButtonSelected: {
+    borderColor: "#111111",
+    borderWidth: 2,
+  },
+  sizeButtonUnavailable: {
+    opacity: 0.4,
+  },
+  sizeText: {
+    fontSize: 14,
+    color: "#111111",
+  },
+  sizeTextUnavailable: {
+    textDecorationLine: "line-through",
+    color: "#707072",
   },
   addButton: {
     marginTop: 30,

@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function BagScreen() {
@@ -16,7 +17,7 @@ export default function BagScreen() {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push("/(tabs)/shop")}>
         <Text style={styles.buttonText}>Shop Now</Text>
       </TouchableOpacity>
     </View>
