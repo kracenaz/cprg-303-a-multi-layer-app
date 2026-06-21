@@ -21,7 +21,7 @@ const HERO_ITEMS = [
   {
     id: "1",
     title: "Rip the Script",
-    image: { uri: "https://picsum.photos/seed/hero1/800/500" },
+    image: { uri: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=500&q=80&auto=format&fit=crop" },
   },
   {
     id: "2",
@@ -31,20 +31,20 @@ const HERO_ITEMS = [
   {
     id: "3",
     title: "Built for Speed",
-    image: { uri: "https://picsum.photos/seed/hero3/800/500" },
+    image: { uri: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&h=500&q=80&auto=format&fit=crop" },
   },
   {
     id: "4",
     title: "Summer Collection",
-    image: { uri: "https://picsum.photos/seed/hero4/800/500" },
+    image: { uri: "https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=800&h=500&q=80&auto=format&fit=crop" },
   },
 ];
 
 const CATEGORIES = [
-  { id: "shoes", label: "Shoes", image: { uri: "https://picsum.photos/seed/catshoes/400/400" } },
-  { id: "clothing", label: "Clothing", image: { uri: "https://picsum.photos/seed/catclothing/400/400" } },
-  { id: "gear", label: "Gear", image: { uri: "https://picsum.photos/seed/catgear/400/400" } },
-  { id: "sport", label: "Sport", image: { uri: "https://picsum.photos/seed/catsport/400/400" } },
+  { id: "shoes", label: "Shoes", image: { uri: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&q=80&auto=format&fit=crop" } },
+  { id: "clothing", label: "Clothing", image: { uri: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=400&q=80&auto=format&fit=crop" } },
+  { id: "gear", label: "Gear", image: { uri: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&q=80&auto=format&fit=crop" } },
+  { id: "sport", label: "Sport", image: { uri: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=400&q=80&auto=format&fit=crop" } },
 ];
 
 const GENDERS = ["Men", "Women", "Kids"];
