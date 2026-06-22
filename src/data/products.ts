@@ -65,16 +65,16 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "n7-track-jacket",
-    name: "Nike N7 Track Jacket",
-    category: "Men's Jacket",
-    price: 100,
-    image: { uri: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=400&q=80&auto=format&fit=crop" },
-    sizes: [
-      { label: "S", available: true },
-      { label: "M", available: true },
-      { label: "L", available: false },
-      { label: "XL", available: true },
-    ],
+     name: "Nike N7 Track Jacket",
+     category: "Men's Jacket",
+     price: 150,
+     image: require('../../assets/images/WMNS_AIR_FORCE_1__07.avif'),
+     sizes: [
+     { label: "S", available: true },
+     { label: "M", available: true },
+     { label: "L", available: false },
+     { label: "XL", available: true },
+      ],
   },
   {
     id: "canada-jersey",
